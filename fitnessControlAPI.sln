@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4758DEA8-3F2A-4CF5-A789-71877124C8C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Domain", "src\fitnessControlAPI.Domain\fitnessControlAPI.Domain.csproj", "{1760AC2F-32F2-4B32-8664-1BD4E5042269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Application", "src\fitnessControlAPI.Application\fitnessControlAPI.Application.csproj", "{77A684B5-DFE1-434A-962C-AA9976F09958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Infrastructure", "src\fitnessControlAPI.Infrastructure\fitnessControlAPI.Infrastructure.csproj", "{70ECC06E-0CF1-4C89-84F8-9447F836BC05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Persistence", "src\fitnessControlAPI.Persistence\fitnessControlAPI.Persistence.csproj", "{5099D916-FC6F-4F72-A742-3941BD161F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Presentation", "src\fitnessControlAPI.Presentation\fitnessControlAPI.Presentation.csproj", "{738F1AFA-E624-4312-8FB8-BDD2874559B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.WebApi", "src\fitnessControlAPI.WebApi\fitnessControlAPI.WebApi.csproj", "{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1760AC2F-32F2-4B32-8664-1BD4E5042269} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+		{77A684B5-DFE1-434A-962C-AA9976F09958} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+		{70ECC06E-0CF1-4C89-84F8-9447F836BC05} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+		{5099D916-FC6F-4F72-A742-3941BD161F60} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+		{738F1AFA-E624-4312-8FB8-BDD2874559B1} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1760AC2F-32F2-4B32-8664-1BD4E5042269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1760AC2F-32F2-4B32-8664-1BD4E5042269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1760AC2F-32F2-4B32-8664-1BD4E5042269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1760AC2F-32F2-4B32-8664-1BD4E5042269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77A684B5-DFE1-434A-962C-AA9976F09958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77A684B5-DFE1-434A-962C-AA9976F09958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77A684B5-DFE1-434A-962C-AA9976F09958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77A684B5-DFE1-434A-962C-AA9976F09958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70ECC06E-0CF1-4C89-84F8-9447F836BC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70ECC06E-0CF1-4C89-84F8-9447F836BC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70ECC06E-0CF1-4C89-84F8-9447F836BC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70ECC06E-0CF1-4C89-84F8-9447F836BC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5099D916-FC6F-4F72-A742-3941BD161F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5099D916-FC6F-4F72-A742-3941BD161F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5099D916-FC6F-4F72-A742-3941BD161F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5099D916-FC6F-4F72-A742-3941BD161F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

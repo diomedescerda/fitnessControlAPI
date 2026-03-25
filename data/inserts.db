@@ -1,0 +1,361 @@
+-- =====================================================
+-- SAMPLE DATA INSERTION
+-- =====================================================
+
+INSERT INTO muscle_groups (name) VALUES
+    ('Chest'), ('Back'), ('Shoulders'), ('Biceps'), ('Triceps'),
+    ('Quadriceps'), ('Hamstrings'), ('Glutes'), ('Calves'), ('Abs'),
+    ('Forearms'), ('Traps'), ('Lats'), ('Lower Back'), ('Adductors'),
+    ('Serratus Anterior'), ('Rhomboids'), ('Brachialis'), ('Hip Flexors')
+ON CONFLICT (name) DO NOTHING;
+
+-- Insert default categories
+INSERT INTO exercise_categories (name, description) VALUES
+    ('Push', 'Focuses on chest, shoulders, and triceps'),
+    ('Pull', 'Targets the back and biceps'),
+    ('Legs', 'Covers quadriceps, hamstrings, glutes, and calves');
+
+-- =====================================================
+-- CHEST EXERCISES
+-- =====================================================
+
+-- Incline Barbell Bench Press
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Incline Barbell Bench Press', 'Barbell bench press on incline bench', id 
+FROM exercise_categories WHERE name = 'Push';
+
+-- Primary: Chest (Upper), Secondary: Triceps, Shoulders
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Incline Barbell Bench Press')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Chest'  -- Primary if Chest
+FROM muscle_groups mg 
+WHERE mg.name IN ('Chest', 'Triceps', 'Shoulders');
+
+-- Pec Deck (Machine Fly)
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Pec Deck', 'Machine chest fly', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Pec Deck')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Chest'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Chest', 'Shoulders', 'Biceps');
+
+-- =====================================================
+-- SHOULDER EXERCISES
+-- =====================================================
+
+-- Dumbbell Shoulder Press
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Dumbbell Shoulder Press', 'Seated or standing overhead press with dumbbells', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Dumbbell Shoulder Press')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Shoulders'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Shoulders', 'Triceps', 'Traps');
+
+-- High Cable Lateral Raise
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'High Cable Lateral Raise', 'Cable lateral raise with high pulley', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'High Cable Lateral Raise')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Shoulders'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Shoulders', 'Traps');
+
+-- =====================================================
+-- TRICEPS EXERCISES
+-- =====================================================
+
+-- Skull Crusher (Lying Triceps Extension)
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Skull Crusher', 'Lying triceps extension with EZ-bar or dumbbells', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Skull Crusher')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Triceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Triceps', 'Chest');
+
+-- Rope Pushdown
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Rope Pushdown', 'Cable triceps pushdown with rope attachment', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Rope Pushdown')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Triceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Triceps');
+
+-- =====================================================
+-- BACK EXERCISES
+-- =====================================================
+
+-- Lat Pulldown
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Lat Pulldown', 'Cable pulldown to chest or behind neck', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Lat Pulldown')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Lats'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Lats', 'Back', 'Biceps', 'Rhomboids');
+
+-- Deficit Pendlay Row
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Deficit Pendlay Row', 'Barbell row from floor with deficit', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Deficit Pendlay Row')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Back'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Back', 'Lats', 'Rhomboids', 'Traps', 'Lower Back', 'Biceps');
+
+-- Straight-Arm Pulldown
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Straight-Arm Pulldown', 'Cable pulldown with straight arms', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Straight-Arm Pulldown')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Lats'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Lats', 'Back', 'Triceps');
+
+-- Incline Dumbbell Y-Raise
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Incline Dumbbell Y-Raise', 'Face-down incline bench Y raise for lower traps', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Incline Dumbbell Y-Raise')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Traps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Traps', 'Shoulders', 'Rhomboids');
+
+-- =====================================================
+-- BICEPS EXERCISES
+-- =====================================================
+
+-- EZ-Bar Bicep Curl
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'EZ-Bar Bicep Curl', 'Bicep curl with EZ-bar', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'EZ-Bar Bicep Curl')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Biceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Biceps', 'Forearms');
+
+-- Hammer Curl
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Hammer Curl', 'Dumbbell curl with neutral grip', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Hammer Curl')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Biceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Biceps', 'Forearms', 'Brachialis');
+
+-- =====================================================
+-- QUADS EXERCISES
+-- =====================================================
+
+-- Barbell Squat
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Barbell Squat', 'Back squat with barbell', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Barbell Squat')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Quadriceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Quadriceps', 'Hamstrings', 'Glutes', 'Lower Back', 'Abs');
+
+-- Hack Squat
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Hack Squat', 'Machine hack squat', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Hack Squat')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Quadriceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Quadriceps', 'Glutes');
+
+-- Leg Extension
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Leg Extension', 'Machine leg extension', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Leg Extension')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Quadriceps'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Quadriceps');
+
+-- =====================================================
+-- HAMSTRINGS EXERCISES
+-- =====================================================
+
+-- Lying Leg Curl
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Lying Leg Curl', 'Lying machine leg curl', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Lying Leg Curl')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Hamstrings'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Hamstrings', 'Glutes');
+
+-- Seated Leg Curl
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Seated Leg Curl', 'Seated machine leg curl', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Seated Leg Curl')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Hamstrings'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Hamstrings');
+
+-- Romanian Deadlift
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Romanian Deadlift', 'Stiff-legged deadlift focusing on hamstrings', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Romanian Deadlift')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Hamstrings'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Hamstrings', 'Glutes', 'Lower Back');
+
+-- =====================================================
+-- GLUTES EXERCISES
+-- =====================================================
+
+-- Hip Abduction
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Hip Abduction', 'Machine hip abduction (glute-focused)', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Hip Abduction')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Glutes'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Glutes', 'Adductors');
+
+-- =====================================================
+-- CALVES EXERCISES
+-- =====================================================
+
+-- Calf Raise
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Calf Raise', 'Standing or seated calf raise', id 
+FROM exercise_categories WHERE name = 'Legs';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Calf Raise')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Calves'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Calves');
+
+-- =====================================================
+-- ABS EXERCISES
+-- =====================================================
+
+-- Roman Chair Leg Raise
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Roman Chair Leg Raise', 'Hanging leg raise on roman chair', id 
+FROM exercise_categories WHERE name = 'Legs';  -- Usually considered core
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Roman Chair Leg Raise')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Abs'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Abs', 'Hip Flexors');
+
+-- =====================================================
+-- ADDITIONAL CONVENTIONAL EXERCISES
+-- =====================================================
+
+-- Bench Press (Flat)
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Bench Press', 'Flat barbell bench press', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Bench Press')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Chest'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Chest', 'Triceps', 'Shoulders');
+
+-- Conventional Deadlift
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Deadlift', 'Conventional deadlift', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Deadlift')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Hamstrings'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Hamstrings', 'Glutes', 'Lower Back', 'Traps', 'Forearms');
+
+-- Pull-Up
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Pull-Up', 'Bodyweight pull-up', id 
+FROM exercise_categories WHERE name = 'Pull';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Pull-Up')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Lats'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Lats', 'Back', 'Biceps');
+
+-- Overhead Press (Strict)
+INSERT INTO exercises (name, description, category_id) 
+SELECT 'Overhead Press', 'Standing barbell overhead press', id 
+FROM exercise_categories WHERE name = 'Push';
+
+WITH exercise_id AS (SELECT id FROM exercises WHERE name = 'Overhead Press')
+INSERT INTO exercise_muscle_groups (exercise_id, muscle_group_id, is_primary)
+SELECT (SELECT id FROM exercise_id), mg.id, 
+       mg.name = 'Shoulders'
+FROM muscle_groups mg 
+WHERE mg.name IN ('Shoulders', 'Triceps', 'Traps');

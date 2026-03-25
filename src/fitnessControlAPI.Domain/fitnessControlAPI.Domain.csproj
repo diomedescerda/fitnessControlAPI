@@ -4,7 +4,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>fitnessControlAPI.Application</RootNamespace>
+        <RootNamespace>fitnessControlAPI.Domain</RootNamespace>
     </PropertyGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 -- Create database
-CREATE DATABASE fitness_tracker;
-\c fitness_tracker;
+\c fitness_control;
 
 -- Enable UUID extension for better ID generation
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -108,3 +107,42 @@ CREATE TABLE running_sessions (
 
 -- Index for date-based queries
 CREATE INDEX idx_running_sessions_date ON running_sessions(session_date);
+
+
+-- =====================================================
+-- MEASUREMENT TRACKING TABLES
+-- =====================================================
+-- User profile (static info, only one record)
+CREATE TABLE user_profiles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(30) NOT NULL,
+    height_cm DECIMAL(5,2) NOT NULL,
+    birth_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Body measurements (tracked over time)
+CREATE TABLE body_measurements (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES user_profiles(id) ON DELETE CASCADE,
+    recorded_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    
+    weight_kg DECIMAL(5,2),
+    
+    -- Circumferences (cm)
+    chest_cm DECIMAL(5,2),
+    waist_cm DECIMAL(5,2),
+    hips_cm DECIMAL(5,2),
+    bicep_cm DECIMAL(5,2),
+    thigh_cm DECIMAL(5,2),
+    calf_cm DECIMAL(5,2),
+    
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    UNIQUE(user_id, recorded_date)
+);
+
+CREATE INDEX idx_body_measurements_user_id ON body_measurements(user_id);
+CREATE INDEX idx_body_measurements_date ON body_measurements(recorded_date);

@@ -359,3 +359,10 @@ SELECT (SELECT id FROM exercise_id), mg.id,
        mg.name = 'Shoulders'
 FROM muscle_groups mg 
 WHERE mg.name IN ('Shoulders', 'Triceps', 'Traps');
+
+INSERT INTO user_profiles (name, height_cm, birth_date) 
+VALUES (
+    'Diomedes',
+    177.0,
+    '2002-08-23'
+);

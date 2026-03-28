@@ -7,4 +7,6 @@ public class Exercise
     public string? Description { get; set; }
     public int? CategoryId { get; set; }
     public bool IsCustom { get; set; }
+    
+   public Exercise? ExerciseCategory { get; set; }
 }

@@ -7,4 +7,9 @@ public class WorkoutExercise
     public required int ExerciseId { get; set; }
     public required int OrderNumber { get; set; }
     public string? Notes { get; set; }
+    
+    public WorkoutSession WorkoutSession { get; set; }
+    public Exercise Exercise { get; set; }
+    
+    public ICollection<ExerciseSet> ExerciseSets { get; set; } = new List<ExerciseSet>();
 }

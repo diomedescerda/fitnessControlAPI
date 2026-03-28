@@ -7,6 +7,7 @@ public class ExerciseSet
     public required int SetNumber { get; set; }
     public required int Reps { get; set; }
     public required decimal Weight { get; set; }
-    public string WeightUnit { get; set; }
     public string? Comment { get; set; }
+    
+    public WorkoutExercise? WorkoutExercise { get; set; }
 }

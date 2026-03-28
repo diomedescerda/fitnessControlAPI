@@ -12,4 +12,6 @@ public class RunningSession
     public int? MaxHeartRate { get; set; }
     public int? CaloriesBurned { get; set; }
     public string? Notes { get; set; }
+    
+    public User? User { get; set; }
 }

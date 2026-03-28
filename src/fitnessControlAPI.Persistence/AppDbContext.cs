@@ -1,11 +1,20 @@
 using fitnessControlAPI.Domain.Entities;
+using fitnessControlAPI.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace fitnessControlAPI.Persistence;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    public DbSet<BodyMeasurement>  BodyMeasurements { get; set; }
+    public DbSet<ExerciseCategory>  ExerciseCategories { get; set; }
+    public DbSet<Exercise>  Exercises { get; set; }
+    public DbSet<ExerciseSet>  ExerciseSets { get; set; }
     public DbSet<MuscleGroup>  MuscleGroups { get; set; }
+    public DbSet<RunningSession>  RunningSessions { get; set; }
+    public DbSet<User>  Users { get; set; }
+    public DbSet<WorkoutExercise>  WorkoutExercises { get; set; }
+    public DbSet<WorkoutSession>  WorkoutSessions { get; set; }
 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
@@ -28,12 +37,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                foreignKey.SetConstraintName(foreignKey.GetConstraintName()?.ToSnakeCase());
            }
        }
-
-      modelBuilder.Entity<MuscleGroup>(entity =>
-      {
-         entity.ToTable("muscle_groups");
-         entity.HasKey(e => e.Id);
-         entity.Property(e => e.Name).IsRequired().HasMaxLength(50);
-      });
+       
+       modelBuilder.ApplyConfiguration(new BodyMeasurementConfiguration());
+       modelBuilder.ApplyConfiguration(new ExerciseCategoryConfiguration());
+       modelBuilder.ApplyConfiguration(new ExerciseConfiguration());
+       modelBuilder.ApplyConfiguration(new ExerciseSetConfiguration());
+       modelBuilder.ApplyConfiguration(new MuscleGroupConfiguration());
+       modelBuilder.ApplyConfiguration(new RunningSessionConfiguration());
+       modelBuilder.ApplyConfiguration(new UserConfiguration());
+       modelBuilder.ApplyConfiguration(new WorkoutExerciseConfiguration());
+       modelBuilder.ApplyConfiguration(new WorkoutSessionConfiguration());
    }
 }

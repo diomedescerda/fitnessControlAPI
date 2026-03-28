@@ -71,7 +71,7 @@ CREATE INDEX idx_exercise_muscle_groups_muscle ON exercise_muscle_groups(muscle_
 CREATE TABLE workout_sessions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    session_date DATE NOT NULL,
+    date DATE NOT NULL,
     notes TEXT, -- Overall workout notes
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -100,11 +100,10 @@ CREATE INDEX idx_workout_exercises_exercise ON workout_exercises(exercise_id);
 -- Individual sets for each exercise
 CREATE TABLE exercise_sets (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    workout_exercise_id UUID REFERENCES workout_exercises(id) ON DELETE CASCADE,
+    workout_exercise_id UUID NOT NULL REFERENCES workout_exercises(id) ON DELETE CASCADE,
     set_number INTEGER NOT NULL,
     reps INTEGER NOT NULL,
-    weight DECIMAL(6,2) NOT NULL,
-    weight_unit VARCHAR(3) DEFAULT 'kg', -- 'kg' or 'lbs'
+    weight DECIMAL(6,2) NOT NULL, -- in kg
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(workout_exercise_id, set_number)
@@ -121,7 +120,7 @@ CREATE INDEX idx_exercise_sets_workout_exercise ON exercise_sets(workout_exercis
 CREATE TABLE running_sessions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    session_date DATE NOT NULL,
+    date DATE NOT NULL,
     distance DECIMAL(6,2) NOT NULL, -- in kilometers
     duration INTERVAL NOT NULL, -- PostgreSQL interval type
     avg_pace INTERVAL GENERATED ALWAYS AS (duration / distance) STORED,  -- Auto-calculated

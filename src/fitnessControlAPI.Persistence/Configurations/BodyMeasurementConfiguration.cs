@@ -15,9 +15,8 @@ public class BodyMeasurementConfiguration : IEntityTypeConfiguration<BodyMeasure
             .HasDefaultValueSql("uuid_generate_v4()");
         builder.Property(e => e.UserId)
             .IsRequired();
-        builder.Property(e => e.RecordedDate)
-            .IsRequired()
-            .HasDefaultValue("CURRENT_DATE");
+        builder.Property(e => e.Date)
+            .IsRequired();
         builder.Property(e => e.Weight)
             .IsRequired()
             .HasPrecision(5,2);
@@ -36,7 +35,7 @@ public class BodyMeasurementConfiguration : IEntityTypeConfiguration<BodyMeasure
         builder.Property(e => e.Notes)
             .HasMaxLength(500);
             
-        builder.HasIndex(e => new { e.UserId, e.RecordedDate })
+        builder.HasIndex(e => new { e.UserId, RecordedDate = e.Date })
             .IsUnique()
             .HasDatabaseName("ix_body_measurements_user_id_recorded_date");
         

@@ -79,8 +79,8 @@ CREATE TABLE workout_sessions (
 
 -- Index for date-based queries
 CREATE INDEX idx_workout_sessions_user_id ON workout_sessions(user_id);
-CREATE INDEX idx_workout_sessions_date ON workout_sessions(session_date);
-CREATE INDEX idx_workout_sessions_user_date ON workout_sessions(user_id, session_date);
+CREATE INDEX idx_workout_sessions_date ON workout_sessions(date);
+CREATE INDEX idx_workout_sessions_user_date ON workout_sessions(user_id, date);
 
 -- Individual exercises performed in a workout
 CREATE TABLE workout_exercises (
@@ -134,8 +134,8 @@ CREATE TABLE running_sessions (
 
 -- Index for date-based queries
 CREATE INDEX idx_running_sessions_user_id ON running_sessions(user_id);
-CREATE INDEX idx_running_sessions_date ON running_sessions(session_date);
-CREATE INDEX idx_running_sessions_user_date ON running_sessions(user_id, session_date);
+CREATE INDEX idx_running_sessions_date ON running_sessions(date);
+CREATE INDEX idx_running_sessions_user_date ON running_sessions(user_id, date);
 
 -- =====================================================
 -- MEASUREMENT TRACKING TABLES
@@ -145,7 +145,7 @@ CREATE INDEX idx_running_sessions_user_date ON running_sessions(user_id, session
 CREATE TABLE body_measurements (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    recorded_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    date DATE NOT NULL DEFAULT CURRENT_DATE,
     weight DECIMAL(5,2) NOT NULL,
     -- Circumferences (cm)
     chest DECIMAL(5,2),
@@ -157,11 +157,11 @@ CREATE TABLE body_measurements (
     notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    UNIQUE(user_id, recorded_date)
+    UNIQUE(user_id, date)
 );
 
 CREATE INDEX idx_body_measurements_user_id ON body_measurements(user_id);
-CREATE INDEX idx_body_measurements_date ON body_measurements(recorded_date);
+CREATE INDEX idx_body_measurements_date ON body_measurements(date);
 
 -- =====================================================
 -- CREATE TRIGGER FUNCTION AND TRIGGERS

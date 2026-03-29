@@ -1,7 +1,6 @@
 using fitnessControlAPI.Application;
 using fitnessControlAPI.Infrastructure;
 using fitnessControlAPI.Persistence;
-using fitnessControlAPI.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,6 @@ builder.Services
     .AddApplication()
     .AddInfrastructure()
     .AddPersistence(builder.Configuration)
-    .AddPresentation()
     .AddControllers();
 
 var app = builder.Build();

@@ -1,13 +1,13 @@
 using fitnessControlAPI.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fitnessControlAPI.WebApi.Controllers;
+namespace fitnessControlAPI.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController(IUserRepository repository) : ControllerBase
+public class MuscleGroupsController(IMuscleGroupRepository repository) : ControllerBase
 {
-    private readonly IUserRepository _repository = repository;
+    private readonly IMuscleGroupRepository _repository = repository;
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -18,12 +18,12 @@ public class UsersController(IUserRepository repository) : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var user = await _repository.GetByIdAsync(id);
+        var muscleGroup = await _repository.GetByIdAsync(id);
         
-        if (user == null)
+        if (muscleGroup == null)
         {
             return NotFound();
         }
-        return Ok(user);
+        return Ok(muscleGroup);
     }
 }

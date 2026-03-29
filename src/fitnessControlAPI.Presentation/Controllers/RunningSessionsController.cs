@@ -1,13 +1,13 @@
 using fitnessControlAPI.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fitnessControlAPI.WebApi.Controllers;
+namespace fitnessControlAPI.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WorkoutExercisesController(IWorkoutExerciseRepository repository) : ControllerBase
+public class RunningSessionsController(IRunningSessionRepository repository) : ControllerBase
 {
-    private readonly IWorkoutExerciseRepository _repository = repository;
+    private readonly IRunningSessionRepository _repository = repository;
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -18,12 +18,12 @@ public class WorkoutExercisesController(IWorkoutExerciseRepository repository) :
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var workoutExercise = await _repository.GetByIdAsync(id);
+        var runningSession = await _repository.GetByIdAsync(id);
         
-        if (workoutExercise == null)
+        if (runningSession == null)
         {
             return NotFound();
         }
-        return Ok(workoutExercise);
+        return Ok(runningSession);
     }
 }

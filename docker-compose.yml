@@ -1,5 +1,5 @@
 services:
-  database:
+  fitnesscontrolapi.database:
     image: postgres:18-alpine
     container_name: fitness_postgres
     ports:
@@ -11,3 +11,21 @@ services:
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
       - ./init-sql/:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  fitnesscontrolapi.presentation:
+    image: fitnesscontrolapi.presentation
+    build:
+      context: .
+      dockerfile: src/fitnessControlAPI.Presentation/Dockerfile
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development 
+    depends_on:
+      fitnesscontrolapi.database:
+        condition: service_healthy

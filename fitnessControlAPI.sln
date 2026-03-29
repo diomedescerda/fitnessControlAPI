@@ -10,9 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Persistence", "src\fitnessControlAPI.Persistence\fitnessControlAPI.Persistence.csproj", "{5099D916-FC6F-4F72-A742-3941BD161F60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Presentation", "src\fitnessControlAPI.Presentation\fitnessControlAPI.Presentation.csproj", "{738F1AFA-E624-4312-8FB8-BDD2874559B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.WebApi", "src\fitnessControlAPI.WebApi\fitnessControlAPI.WebApi.csproj", "{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessControlAPI.Presentation", "src\fitnessControlAPI.Presentation\fitnessControlAPI.Presentation.csproj", "{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,7 +22,6 @@ Global
 		{77A684B5-DFE1-434A-962C-AA9976F09958} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
 		{70ECC06E-0CF1-4C89-84F8-9447F836BC05} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
 		{5099D916-FC6F-4F72-A742-3941BD161F60} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
-		{738F1AFA-E624-4312-8FB8-BDD2874559B1} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
 		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF} = {4758DEA8-3F2A-4CF5-A789-71877124C8C8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -44,10 +41,6 @@ Global
 		{5099D916-FC6F-4F72-A742-3941BD161F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5099D916-FC6F-4F72-A742-3941BD161F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5099D916-FC6F-4F72-A742-3941BD161F60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{738F1AFA-E624-4312-8FB8-BDD2874559B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2CC7F54-DC9F-4FBF-9F0F-C6AD7B6FFFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -15,4 +15,25 @@ public class BodyMeasurementRepository(AppDbContext context) : IBodyMeasurementR
    {
       return await context.BodyMeasurements.FindAsync(id);
    }
+   
+   public async Task<BodyMeasurement> CreateAsync(BodyMeasurement bodyMeasurement)
+   {
+      var entry = await context.BodyMeasurements.AddAsync(bodyMeasurement);
+      await context.SaveChangesAsync();
+      return entry.Entity;
+   }
+
+   public async Task UpdateAsync(BodyMeasurement bodyMeasurement)
+   {
+      context.BodyMeasurements.Update(bodyMeasurement);
+      await context.SaveChangesAsync();
+   }
+
+   public async Task DeleteAsync(int id)
+   {
+      var bodyMeasurement = await context.BodyMeasurements.FindAsync(id);
+      if (bodyMeasurement is null) return;
+      context.BodyMeasurements.Remove(bodyMeasurement);
+      await context.SaveChangesAsync();
+   }
 }

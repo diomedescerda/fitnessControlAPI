@@ -15,4 +15,25 @@ public class ExerciseRepository(AppDbContext context) : IExerciseRepository
    {
       return await context.Exercises.FindAsync(id);
    }
+   
+   public async Task<Exercise> CreateAsync(Exercise exercise)
+   {
+      var entry = await context.Exercises.AddAsync(exercise);
+      await context.SaveChangesAsync();
+      return entry.Entity;
+   }
+
+   public async Task UpdateAsync(Exercise exercise)
+   {
+      context.Exercises.Update(exercise);
+      await context.SaveChangesAsync();
+   }
+
+   public async Task DeleteAsync(int id)
+   {
+      var exercise = await context.Exercises.FindAsync(id);
+      if (exercise is null) return;
+      context.Exercises.Remove(exercise);
+      await context.SaveChangesAsync();
+   }
 }

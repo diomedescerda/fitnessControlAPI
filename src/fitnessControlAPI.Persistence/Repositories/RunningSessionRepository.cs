@@ -15,4 +15,25 @@ public class RunningSessionRepository(AppDbContext context) : IRunningSessionRep
    {
       return await context.RunningSessions.FindAsync(id);
    }
+   
+   public async Task<RunningSession> CreateAsync(RunningSession runningSession)
+   {
+      var entry = await context.RunningSessions.AddAsync(runningSession);
+      await context.SaveChangesAsync();
+      return entry.Entity;
+   }
+
+   public async Task UpdateAsync(RunningSession runningSession)
+   {
+      context.RunningSessions.Update(runningSession);
+      await context.SaveChangesAsync();
+   }
+
+   public async Task DeleteAsync(int id)
+   {
+      var runningSession = await context.RunningSessions.FindAsync(id);
+      if (runningSession is null) return;
+      context.RunningSessions.Remove(runningSession);
+      await context.SaveChangesAsync();
+   }
 }

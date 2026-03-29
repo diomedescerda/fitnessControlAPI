@@ -15,4 +15,25 @@ public class UserRepository(AppDbContext context) : IUserRepository
    {
       return await context.Users.FindAsync(id);
    }
+   
+   public async Task<User> CreateAsync(User user)
+   {
+      var entry = await context.Users.AddAsync(user);
+      await context.SaveChangesAsync();
+      return entry.Entity;
+   }
+
+   public async Task UpdateAsync(User user)
+   {
+      context.Users.Update(user);
+      await context.SaveChangesAsync();
+   }
+
+   public async Task DeleteAsync(int id)
+   {
+      var user = await context.Users.FindAsync(id);
+      if (user is null) return;
+      context.Users.Remove(user);
+      await context.SaveChangesAsync();
+   }
 }

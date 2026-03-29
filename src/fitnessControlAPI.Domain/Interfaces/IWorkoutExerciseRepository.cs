@@ -4,10 +4,9 @@ namespace fitnessControlAPI.Domain.Interfaces;
 
 public interface IWorkoutExerciseRepository
 {
+    Task CreateAsync(WorkoutExercise workoutExercise);
     Task<IEnumerable<WorkoutExercise>> GetAllAsync();
     Task<WorkoutExercise?> GetByIdAsync(int id);
-    void CreateAsync(WorkoutExercise workoutExercise);
-    void UpdateAsync(WorkoutExercise workoutExercise);
-    void DeleteAsync(int id);
-    void SaveAsync();
+    Task UpdateAsync(WorkoutExercise workoutExercise);
+    Task DeleteAsync(int id);
 }

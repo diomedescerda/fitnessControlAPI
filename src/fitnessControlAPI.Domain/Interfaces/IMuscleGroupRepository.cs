@@ -4,10 +4,9 @@ namespace fitnessControlAPI.Domain.Interfaces;
 
 public interface IMuscleGroupRepository
 {
+    Task CreateAsync(MuscleGroup muscleGroup);
     Task<IEnumerable<MuscleGroup>> GetAllAsync();
     Task<MuscleGroup?> GetByIdAsync(int id);
-    void CreateAsync(MuscleGroup muscleGroup);
-    void UpdateAsync(MuscleGroup muscleGroup);
-    void DeleteAsync(int id);
-    void SaveAsync();
+    Task UpdateAsync(MuscleGroup muscleGroup);
+    Task DeleteAsync(int id);
 }

@@ -15,4 +15,25 @@ public class MuscleGroupRepository(AppDbContext context) : IMuscleGroupRepositor
    {
       return await context.MuscleGroups.FindAsync(id);
    }
+
+   public async Task<MuscleGroup> CreateAsync(MuscleGroup muscleGroup)
+   {
+      var entry = await context.MuscleGroups.AddAsync(muscleGroup);
+      await context.SaveChangesAsync();
+      return entry.Entity;
+   }
+
+   public async Task UpdateAsync(MuscleGroup muscleGroup)
+   {
+      context.MuscleGroups.Update(muscleGroup);
+      await context.SaveChangesAsync();
+   }
+
+   public async Task DeleteAsync(int id)
+   {
+       var muscleGroup = await context.MuscleGroups.FindAsync(id);
+       if (muscleGroup is null) return;
+       context.MuscleGroups.Remove(muscleGroup);
+       await context.SaveChangesAsync();
+   }
 }

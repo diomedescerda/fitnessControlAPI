@@ -15,10 +15,12 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
             .HasMaxLength(100);
         builder.Property(e => e.Description)
             .HasMaxLength(500);
+        builder.Property(e => e.CategoryId)
+            .IsRequired();
         builder.Property(e => e.IsCustom);
         
         builder.HasOne(e => e.ExerciseCategory)
-            .WithMany()
+            .WithMany(e => e.Exercises)
             .HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.Cascade);
     }

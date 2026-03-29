@@ -20,7 +20,7 @@ public class WorkoutSessionConfiguration : IEntityTypeConfiguration<WorkoutSessi
             .HasMaxLength(500);
         
         builder.HasOne(e => e.User)
-            .WithMany()
+            .WithMany(e => e.WorkoutSessions)
             .HasForeignKey(e => e.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }

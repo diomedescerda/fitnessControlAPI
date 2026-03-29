@@ -26,11 +26,11 @@ public class WorkoutExerciseConfiguration : IEntityTypeConfiguration<WorkoutExer
             .HasDatabaseName("ix_workout_exercise_sets_workout_exercise_id_order_number");
         
         builder.HasOne(e => e.WorkoutSession)
-            .WithMany()
+            .WithMany(e => e.WorkoutExercises)
             .HasForeignKey(e => e.WorkoutSessionId)
             .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(e => e.Exercise)
-            .WithMany()
+            .WithMany(e => e.WorkoutExercises)
             .HasForeignKey(e => e.ExerciseId)
             .OnDelete(DeleteBehavior.Cascade);
     }

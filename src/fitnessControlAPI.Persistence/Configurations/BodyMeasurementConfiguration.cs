@@ -40,7 +40,7 @@ public class BodyMeasurementConfiguration : IEntityTypeConfiguration<BodyMeasure
             .HasDatabaseName("ix_body_measurements_user_id_recorded_date");
         
         builder.HasOne(e => e.User)
-            .WithMany()
+            .WithMany(e => e.BodyMeasurements)
             .HasForeignKey(e => e.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }

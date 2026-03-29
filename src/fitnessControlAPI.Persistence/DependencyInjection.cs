@@ -13,7 +13,15 @@ public static class DependencyInjection
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        services.AddScoped<IBodyMeasurementRepository, BodyMeasurementRepository>();
+        services.AddScoped<IExerciseCategoryRepository, ExerciseCategoryRepository>();
+        services.AddScoped<IExerciseRepository, ExerciseRepository>();
+        services.AddScoped<IExerciseSetRepository, ExerciseSetRepository>();
         services.AddScoped<IMuscleGroupRepository, MuscleGroupRepository>();
+        services.AddScoped<IRunningSessionRepository, RunningSessionRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
+        services.AddScoped<IWorkoutSessionRepository, WorkoutSessionRepository>();
         
         return services;
     }

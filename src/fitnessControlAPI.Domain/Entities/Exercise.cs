@@ -8,5 +8,7 @@ public class Exercise
     public int? CategoryId { get; set; }
     public bool IsCustom { get; set; }
     
-   public Exercise? ExerciseCategory { get; set; }
+   public ExerciseCategory? ExerciseCategory { get; set; }
+   
+   public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
 }

@@ -28,7 +28,7 @@ public class ExerciseSetConfiguration : IEntityTypeConfiguration<ExerciseSet>
             .HasDatabaseName("ix_exercise_sets_workout_exercise_id_set_number");
         
         builder.HasOne(e => e.WorkoutExercise)
-            .WithMany()
+            .WithMany(e => e.ExerciseSets)
             .HasForeignKey(e => e.WorkoutExerciseId)
             .OnDelete(DeleteBehavior.Cascade);
     }

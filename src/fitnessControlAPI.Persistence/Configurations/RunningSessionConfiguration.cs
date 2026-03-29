@@ -28,7 +28,7 @@ public class RunningSessionConfiguration : IEntityTypeConfiguration<RunningSessi
         builder.Property(e => e.Notes);
         
         builder.HasOne(e => e.User)
-            .WithMany()
+            .WithMany(e => e.RunningSessions)
             .HasForeignKey(e => e.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }

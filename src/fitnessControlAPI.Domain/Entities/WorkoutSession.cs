@@ -8,4 +8,6 @@ public class WorkoutSession
     public string? Notes { get; set; }
     
     public User? User { get; set; }
+    
+    public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
 }

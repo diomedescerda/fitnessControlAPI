@@ -11,7 +11,7 @@ public class RunningSessionRepository(AppDbContext context) : IRunningSessionRep
       return await context.RunningSessions.ToListAsync();
    }
 
-   public async Task<RunningSession?> GetByIdAsync(int id)
+   public async Task<RunningSession?> GetByIdAsync(Guid id)
    {
       return await context.RunningSessions.FindAsync(id);
    }
@@ -29,7 +29,7 @@ public class RunningSessionRepository(AppDbContext context) : IRunningSessionRep
       await context.SaveChangesAsync();
    }
 
-   public async Task DeleteAsync(int id)
+   public async Task DeleteAsync(Guid id)
    {
       var runningSession = await context.RunningSessions.FindAsync(id);
       if (runningSession is null) return;

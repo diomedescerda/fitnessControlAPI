@@ -11,7 +11,7 @@ public class ExerciseSetRepository(AppDbContext context) : IExerciseSetRepositor
       return await context.ExerciseSets.ToListAsync();
    }
 
-   public async Task<ExerciseSet?> GetByIdAsync(int id)
+   public async Task<ExerciseSet?> GetByIdAsync(Guid id)
    {
       return await context.ExerciseSets.FindAsync(id);
    }
@@ -29,7 +29,7 @@ public class ExerciseSetRepository(AppDbContext context) : IExerciseSetRepositor
       await context.SaveChangesAsync();
    }
 
-   public async Task DeleteAsync(int id)
+   public async Task DeleteAsync(Guid id)
    {
       var exerciseSet = await context.ExerciseSets.FindAsync(id);
       if (exerciseSet is null) return;

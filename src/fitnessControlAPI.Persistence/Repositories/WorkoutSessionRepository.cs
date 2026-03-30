@@ -11,7 +11,7 @@ public class WorkoutSessionRepository(AppDbContext context) : IWorkoutSessionRep
       return await context.WorkoutSessions.ToListAsync();
    }
 
-   public async Task<WorkoutSession?> GetByIdAsync(int id)
+   public async Task<WorkoutSession?> GetByIdAsync(Guid id)
    {
       return await context.WorkoutSessions.FindAsync(id);
    }
@@ -29,7 +29,7 @@ public class WorkoutSessionRepository(AppDbContext context) : IWorkoutSessionRep
       await context.SaveChangesAsync();
    }
 
-   public async Task DeleteAsync(int id)
+   public async Task DeleteAsync(Guid id)
    {
       var workoutSession = await context.WorkoutSessions.FindAsync(id);
       if (workoutSession is null) return;

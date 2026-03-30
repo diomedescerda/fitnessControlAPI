@@ -29,7 +29,6 @@ public class MuscleGroupsController(IMuscleGroupRepository repository) : Control
         }
         
         var response = muscleGroup.Adapt<MuscleGroupResponse>();
-        
         return Ok(response);
     }
 

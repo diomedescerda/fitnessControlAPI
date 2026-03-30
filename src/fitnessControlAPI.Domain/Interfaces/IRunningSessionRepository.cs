@@ -6,7 +6,7 @@ public interface IRunningSessionRepository
 {
     Task<RunningSession> CreateAsync(RunningSession runningSession);
     Task<IEnumerable<RunningSession>> GetAllAsync();
-    Task<RunningSession?> GetByIdAsync(int id);
+    Task<RunningSession?> GetByIdAsync(Guid id);
     Task UpdateAsync(RunningSession runningSession);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Guid id);
 }

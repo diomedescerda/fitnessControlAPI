@@ -1,4 +1,7 @@
+using fitnessControlAPI.Domain.Entities;
 using fitnessControlAPI.Domain.Interfaces;
+using fitnessControlAPI.Presentation.DTOs.WorkoutSession;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fitnessControlAPI.Presentation.Controllers;
@@ -16,7 +19,7 @@ public class WorkoutSessionsController(IWorkoutSessionRepository repository) : C
     }
     
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var workoutSession = await _repository.GetByIdAsync(id);
         
@@ -24,6 +27,52 @@ public class WorkoutSessionsController(IWorkoutSessionRepository repository) : C
         {
             return NotFound();
         }
-        return Ok(workoutSession);
+
+        var response = workoutSession.Adapt<WorkoutSessionResponse>();
+        return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateWorkoutSessionRequest request)
+    {
+        var workoutSession = new WorkoutSession
+        {
+            UserId = request.UserId,
+            Date = request.Date,
+            Notes = request.Notes,
+        };
+
+        var created = await _repository.CreateAsync(workoutSession);
+        var response = created.Adapt<WorkoutSessionResponse>();
+        return Ok(response);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateWorkoutSessionRequest request)
+    {
+        var workoutSession = await _repository.GetByIdAsync(id);
+
+        if (workoutSession is null)
+            return NotFound();
+        
+        workoutSession.UserId = request.UserId;
+        workoutSession.Date = request.Date;
+        workoutSession.Notes = request.Notes;
+        
+        await _repository.UpdateAsync(workoutSession);
+        return Ok(workoutSession.Adapt<WorkoutSessionResponse>());
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var workoutSession = await _repository.GetByIdAsync(id);
+        
+        if (workoutSession is null)
+            return NotFound();
+        
+        await _repository.DeleteAsync(workoutSession.Id);
+        
+        return NoContent();
     }
 }

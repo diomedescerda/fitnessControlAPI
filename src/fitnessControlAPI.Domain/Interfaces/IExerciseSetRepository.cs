@@ -6,7 +6,7 @@ public interface IExerciseSetRepository
 {
     Task<ExerciseSet> CreateAsync(ExerciseSet exerciseSet);
     Task<IEnumerable<ExerciseSet>> GetAllAsync();
-    Task<ExerciseSet?> GetByIdAsync(int id);
+    Task<ExerciseSet?> GetByIdAsync(Guid id);
     Task UpdateAsync(ExerciseSet exerciseSet);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Guid id);
 }

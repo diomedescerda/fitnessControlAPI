@@ -6,7 +6,7 @@ public interface IBodyMeasurementRepository
 {
     Task<BodyMeasurement> CreateAsync(BodyMeasurement bodyMeasurement);
     Task<IEnumerable<BodyMeasurement>> GetAllAsync();
-    Task<BodyMeasurement?> GetByIdAsync(int id);
+    Task<BodyMeasurement?> GetByIdAsync(Guid id);
     Task UpdateAsync(BodyMeasurement bodyMeasurement);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Guid id);
 }

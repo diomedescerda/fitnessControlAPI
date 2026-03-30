@@ -11,7 +11,7 @@ public class BodyMeasurementRepository(AppDbContext context) : IBodyMeasurementR
       return await context.BodyMeasurements.ToListAsync();
    }
 
-   public async Task<BodyMeasurement?> GetByIdAsync(int id)
+   public async Task<BodyMeasurement?> GetByIdAsync(Guid id)
    {
       return await context.BodyMeasurements.FindAsync(id);
    }
@@ -29,7 +29,7 @@ public class BodyMeasurementRepository(AppDbContext context) : IBodyMeasurementR
       await context.SaveChangesAsync();
    }
 
-   public async Task DeleteAsync(int id)
+   public async Task DeleteAsync(Guid id)
    {
       var bodyMeasurement = await context.BodyMeasurements.FindAsync(id);
       if (bodyMeasurement is null) return;

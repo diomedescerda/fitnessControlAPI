@@ -15,6 +15,14 @@ public class BodyMeasurementRepository(AppDbContext context) : IBodyMeasurementR
    {
       return await context.BodyMeasurements.FindAsync(id);
    }
+
+   public async Task<BodyMeasurement?> GetMostRecentByUserIdAsync(Guid userId)
+   {
+       return await context.BodyMeasurements
+           .Where(b => b.UserId == userId)
+           .OrderByDescending(b => b.Date)
+           .FirstOrDefaultAsync();
+   }
    
    public async Task<BodyMeasurement> CreateAsync(BodyMeasurement bodyMeasurement)
    {

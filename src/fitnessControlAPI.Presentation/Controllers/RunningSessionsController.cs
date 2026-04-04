@@ -41,7 +41,6 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
             Date = request.Date,
             Distance = request.Distance,
             Duration = request.Duration,
-            AvgPace = request.AvgPace,
             AvgHeartRate = request.AvgHeartRate,
             MaxHeartRate = request.MaxHeartRate,
             CaloriesBurned = request.CaloriesBurned,
@@ -49,8 +48,7 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
         };
 
         var created = await _repository.CreateAsync(runningSession);
-        var response = created.Adapt<RunningSessionResponse>();
-        return Ok(response);
+        return Ok(created.Adapt<CreateRunningSessionRequest>());
     }
 
     [HttpPut("{id}")]
@@ -65,7 +63,6 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
         runningSession.Date = request.Date;
         runningSession.Distance = request.Distance;
         runningSession.Duration = request.Duration;
-        runningSession.AvgPace = request.AvgPace;
         runningSession.AvgHeartRate = request.AvgHeartRate;
         runningSession.MaxHeartRate = request.MaxHeartRate;
         runningSession.CaloriesBurned = request.CaloriesBurned;

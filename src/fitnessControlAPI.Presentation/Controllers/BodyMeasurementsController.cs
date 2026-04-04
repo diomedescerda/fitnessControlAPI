@@ -31,6 +31,14 @@ public class BodyMeasurementsController(IBodyMeasurementRepository repository) :
         var response = bodyMeasurement.Adapt<BodyMeasurementResponse>();
         return Ok(response);
     }
+
+    [HttpGet("recent/{userId}")]
+    public async Task<IActionResult> GetMostRecentByUserId(Guid userId)
+    {
+        var bodyMeasurement = await _repository.GetMostRecentByUserIdAsync(userId);
+        if (bodyMeasurement == null) return NotFound();
+        return Ok(bodyMeasurement.Adapt<BodyMeasurementResponse>());
+    }
     
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateBodyMeasurementRequest request)

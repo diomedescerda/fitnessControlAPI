@@ -3,7 +3,7 @@ namespace fitnessControlAPI.Presentation.DTOs.RunningSession;
 public class RunningSessionResponse {
     public Guid Id { get; set; }
     public required Guid UserId { get; set; }
-    public required DateOnly Date { get; set; }
+    public required string Date { get; set; }
     public required decimal Distance { get; set; }
     public required TimeSpan Duration { get; set; }
     public required TimeSpan AvgPace { get; set; }

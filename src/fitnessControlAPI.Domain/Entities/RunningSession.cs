@@ -4,7 +4,7 @@ public class RunningSession
 {
     public Guid Id { get; set; }
     public required Guid UserId { get; set; }
-    public required string Date { get; set; }
+    public required DateOnly Date { get; set; }
     public required decimal Distance { get; set; }
     public required TimeSpan Duration { get; set; }
     public TimeSpan? AvgPace { get; set; }

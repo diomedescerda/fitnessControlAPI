@@ -21,7 +21,7 @@ public class RunningSessionConfiguration : IEntityTypeConfiguration<RunningSessi
         builder.Property(e => e.Duration)
             .IsRequired();
         builder.Property(e => e.AvgPace)
-            .IsRequired();
+            .ValueGeneratedOnAddOrUpdate();
         builder.Property(e => e.AvgHeartRate);
         builder.Property(e => e.MaxHeartRate);
         builder.Property(e => e.CaloriesBurned);

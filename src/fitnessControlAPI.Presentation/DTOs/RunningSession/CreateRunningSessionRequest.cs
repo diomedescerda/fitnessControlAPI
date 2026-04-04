@@ -2,7 +2,7 @@ namespace fitnessControlAPI.Presentation.DTOs.RunningSession;
 
 public class CreateRunningSessionRequest {
     public required Guid UserId { get; set; }
-    public required string Date { get; set; }
+    public required DateOnly Date { get; set; }
     public required decimal Distance { get; set; }
     public required TimeSpan Duration { get; set; }
     public int? AvgHeartRate { get; set; }

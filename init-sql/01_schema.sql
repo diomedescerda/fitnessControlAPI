@@ -87,10 +87,8 @@ CREATE TABLE workout_exercises (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     workout_session_id UUID REFERENCES workout_sessions(id) ON DELETE CASCADE,
     exercise_id INTEGER NOT NULL REFERENCES exercises(id),
-    order_number INTEGER NOT NULL, -- Order in the workout
-    notes TEXT, -- Exercise-specific notes
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(workout_session_id, order_number)
+    UNIQUE(workout_session_id)
 );
 
 -- Index for date-based queries
@@ -104,7 +102,6 @@ CREATE TABLE exercise_sets (
     set_number INTEGER NOT NULL,
     reps INTEGER NOT NULL,
     weight DECIMAL(6,2) NOT NULL, -- in kg
-    comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(workout_exercise_id, set_number)
 );

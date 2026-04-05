@@ -32,7 +32,7 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
         return Ok(response);
     }
 
-    [HttpGet("weeklyDistance/{userId}")]
+    [HttpGet("weeklyDistance/{userId}/{offset}")]
     public async Task<IActionResult> GetWeeklyDistanceAndOffsetByUserId(Guid userId, int offset)
     {
         return Ok(await _repository.GetWeeklyDistanceByUserIdAndOffsetAsync(userId, offset));

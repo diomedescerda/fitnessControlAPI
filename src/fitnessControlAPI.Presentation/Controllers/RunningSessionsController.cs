@@ -31,6 +31,12 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
         var response = runningSession.Adapt<RunningSessionResponse>();
         return Ok(response);
     }
+
+    [HttpGet("weeklyDistance/{userId}")]
+    public async Task<IActionResult> GetWeeklyDistanceAndOffsetByUserId(Guid userId, int offset)
+    {
+        return Ok(await _repository.GetWeeklyDistanceByUserIdAndOffsetAsync(userId, offset));
+    }
     
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateRunningSessionRequest request)

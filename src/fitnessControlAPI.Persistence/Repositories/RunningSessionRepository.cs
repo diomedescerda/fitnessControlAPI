@@ -15,6 +15,18 @@ public class RunningSessionRepository(AppDbContext context) : IRunningSessionRep
    {
       return await context.RunningSessions.FindAsync(id);
    }
+
+   public async Task<decimal> GetWeeklyDistanceByUserIdAndOffsetAsync(Guid userId, int offset)
+   {
+       var today = DateOnly.FromDateTime(DateTime.Today);
+       var startOfWeek = today.AddDays(-(int)today.DayOfWeek - offset * 7);
+       var endOfWeek = startOfWeek.AddDays(7);
+
+       return await context.RunningSessions
+           .Where(b => b.UserId == userId)
+           .Where(b => b.Date >= startOfWeek && b.Date <= endOfWeek)
+           .SumAsync(b => b.Distance);
+   }
    
    public async Task<RunningSession> CreateAsync(RunningSession runningSession)
    {

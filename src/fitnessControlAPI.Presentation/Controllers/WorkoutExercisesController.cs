@@ -40,7 +40,6 @@ public class WorkoutExercisesController(IWorkoutExerciseRepository repository) :
             WorkoutSessionId = request.WorkoutSessionId,
             ExerciseId = request.ExerciseId,
             OrderNumber = request.OrderNumber,
-            Notes = request.Notes,
         };
 
         var created = await _repository.CreateAsync(workoutExercise);
@@ -59,7 +58,6 @@ public class WorkoutExercisesController(IWorkoutExerciseRepository repository) :
         workoutExercise.WorkoutSessionId = request.WorkoutSessionId;
         workoutExercise.ExerciseId = request.ExerciseId;
         workoutExercise.OrderNumber = request.OrderNumber;
-        workoutExercise.Notes = request.Notes;
         
         await _repository.UpdateAsync(workoutExercise);
         return Ok(workoutExercise.Adapt<WorkoutExerciseResponse>());

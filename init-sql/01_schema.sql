@@ -87,8 +87,9 @@ CREATE TABLE workout_exercises (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     workout_session_id UUID REFERENCES workout_sessions(id) ON DELETE CASCADE,
     exercise_id INTEGER NOT NULL REFERENCES exercises(id),
+    order_number INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(workout_session_id)
+    UNIQUE(workout_session_id, order_number)
 );
 
 -- Index for date-based queries
@@ -102,6 +103,7 @@ CREATE TABLE exercise_sets (
     set_number INTEGER NOT NULL,
     reps INTEGER NOT NULL,
     weight DECIMAL(6,2) NOT NULL, -- in kg
+    comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(workout_exercise_id, set_number)
 );
@@ -158,7 +160,7 @@ CREATE TABLE body_measurements (
 );
 
 CREATE INDEX idx_body_measurements_user_id ON body_measurements(user_id);
-CREATE INDEX idx_body_measurements_date ON body_measurements(date);
+CREATE INDEX idx_body_measurements_date ON body_measurements(recorded_date);
 
 -- =====================================================
 -- CREATE TRIGGER FUNCTION AND TRIGGERS

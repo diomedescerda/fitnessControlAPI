@@ -18,8 +18,6 @@ public class WorkoutExerciseConfiguration : IEntityTypeConfiguration<WorkoutExer
             .IsRequired();
         builder.Property(e => e.OrderNumber)
             .IsRequired();
-        builder.Property(e => e.Notes)
-            .HasMaxLength(500);
         
         builder.HasIndex(e => new { e.WorkoutSessionId, e.OrderNumber })
             .IsUnique()

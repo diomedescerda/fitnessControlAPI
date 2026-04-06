@@ -41,7 +41,6 @@ public class ExerciseSetsController(IExerciseSetRepository repository) : Control
             SetNumber = request.SetNumber,
             Reps = request.Reps,
             Weight = request.Weight,
-            Comment = request.Comment
         };
 
         var created = await _repository.CreateAsync(exerciseSet);
@@ -61,7 +60,6 @@ public class ExerciseSetsController(IExerciseSetRepository repository) : Control
         exerciseSet.SetNumber = request.SetNumber;
         exerciseSet.Reps = request.Reps;
         exerciseSet.Weight = request.Weight;
-        exerciseSet.Comment = request.Comment;
         
         await _repository.UpdateAsync(exerciseSet);
         return Ok(exerciseSet.Adapt<ExerciseSetResponse>());

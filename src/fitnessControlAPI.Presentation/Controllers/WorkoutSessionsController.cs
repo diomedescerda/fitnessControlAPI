@@ -40,6 +40,17 @@ public class WorkoutSessionsController(IWorkoutSessionRepository repository) : C
             UserId = request.UserId,
             Date = request.Date,
             Notes = request.Notes,
+            WorkoutExercises = request.WorkoutExercises.Select(we => new WorkoutExercise
+                {
+                    ExerciseId = we.ExerciseId,
+                    OrderNumber = we.OrderNumber,
+                    ExerciseSets = we.ExerciseSets.Select(es => new ExerciseSet
+                        {
+                            SetNumber = es.SetNumber,
+                            Reps = es.Reps,
+                            Weight = es.Weight,
+                        }).ToList()
+                }).ToList()
         };
 
         var created = await _repository.CreateAsync(workoutSession);

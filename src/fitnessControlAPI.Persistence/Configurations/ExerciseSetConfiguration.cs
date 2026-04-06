@@ -21,7 +21,6 @@ public class ExerciseSetConfiguration : IEntityTypeConfiguration<ExerciseSet>
         builder.Property(e => e.Weight)
             .IsRequired()
             .HasPrecision(6,2);
-        builder.Property(e => e.Comment);
         
         builder.HasIndex(e => new { e.WorkoutExerciseId, e.SetNumber })
             .IsUnique()

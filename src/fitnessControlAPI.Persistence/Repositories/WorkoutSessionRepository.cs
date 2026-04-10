@@ -15,6 +15,18 @@ public class WorkoutSessionRepository(AppDbContext context) : IWorkoutSessionRep
    {
       return await context.WorkoutSessions.FindAsync(id);
    }
+
+   public async Task<int> GetNoGymSessionsByUserIdAndOffsetAsync(Guid userId, int offset)
+   {
+       var today = DateOnly.FromDateTime(DateTime.Today);
+       var startOfWeek = today.AddDays(-(int)today.DayOfWeek - offset * 7);
+       var endOfWeek = startOfWeek.AddDays(7);
+
+       return await context.WorkoutSessions
+           .Where(b => b.UserId == userId)
+           .Where(b => b.Date >= startOfWeek && b.Date <= endOfWeek)
+           .CountAsync();
+   }
    
    public async Task<WorkoutSession> CreateAsync(WorkoutSession workoutSession)
    {

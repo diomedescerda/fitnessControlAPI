@@ -8,6 +8,7 @@ public interface IRunningSessionRepository
     Task<IEnumerable<RunningSession>> GetAllAsync();
     Task<RunningSession?> GetByIdAsync(Guid id);
     Task<decimal> GetWeeklyDistanceByUserIdAndOffsetAsync(Guid userId, int offset);
+    Task<IEnumerable<RunningSession>> GetLastRunningSessionsByUserIdAndNAsync(Guid userId, int n);
     Task UpdateAsync(RunningSession runningSession);
     Task DeleteAsync(Guid id);
 }

@@ -28,6 +28,15 @@ public class RunningSessionRepository(AppDbContext context) : IRunningSessionRep
            .SumAsync(b => b.Distance);
    }
    
+   public async Task<IEnumerable<RunningSession>> GetLastRunningSessionsByUserIdAndNAsync(Guid userId, int n)
+   {
+      return await context.RunningSessions
+          .Where(b => b.UserId == userId)
+          .OrderByDescending(b => b.Date)
+          .Take(n)
+          .ToListAsync();
+   }
+   
    public async Task<RunningSession> CreateAsync(RunningSession runningSession)
    {
       var entry = await context.RunningSessions.AddAsync(runningSession);

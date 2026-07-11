@@ -8,6 +8,7 @@ public interface IWorkoutSessionRepository
     Task<IEnumerable<WorkoutSession>> GetAllAsync();
     Task<WorkoutSession?> GetByIdAsync(Guid id);
     Task<int> GetNoGymSessionsByUserIdAndOffsetAsync(Guid userId, int offset);
+    Task<IEnumerable<WorkoutSession>> GetLastWorkoutSessionsByUserIdAndNAsync(Guid userId, int n);
     Task UpdateAsync(WorkoutSession workoutSession);
     Task DeleteAsync(Guid id);
 }

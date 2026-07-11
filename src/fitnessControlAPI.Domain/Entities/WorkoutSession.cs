@@ -7,7 +7,7 @@ public class WorkoutSession
     public required DateOnly Date { get; set; }
     public string? Notes { get; set; }
     
-    public User? User { get; set; }
+    public UserProfile? User { get; set; }
     
     public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
 }

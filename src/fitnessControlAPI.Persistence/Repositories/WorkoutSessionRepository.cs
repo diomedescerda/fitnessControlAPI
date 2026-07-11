@@ -27,6 +27,15 @@ public class WorkoutSessionRepository(AppDbContext context) : IWorkoutSessionRep
            .Where(b => b.Date >= startOfWeek && b.Date <= endOfWeek)
            .CountAsync();
    }
+
+   public async Task<IEnumerable<WorkoutSession>> GetLastWorkoutSessionsByUserIdAndNAsync(Guid userId, int n)
+   {
+      return await context.WorkoutSessions
+          .Where(b => b.UserId == userId)
+          .OrderByDescending(b => b.Date)
+          .Take(n)
+          .ToListAsync();
+   }
    
    public async Task<WorkoutSession> CreateAsync(WorkoutSession workoutSession)
    {

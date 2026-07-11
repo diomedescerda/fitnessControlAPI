@@ -1,10 +1,13 @@
 using fitnessControlAPI.Domain.Entities;
 using fitnessControlAPI.Persistence.Configurations;
+using fitnessControlAPI.Persistence.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace fitnessControlAPI.Persistence;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 {
     public DbSet<BodyMeasurement>  BodyMeasurements { get; set; }
     public DbSet<ExerciseCategory>  ExerciseCategories { get; set; }
@@ -12,12 +15,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<ExerciseSet>  ExerciseSets { get; set; }
     public DbSet<MuscleGroup>  MuscleGroups { get; set; }
     public DbSet<RunningSession>  RunningSessions { get; set; }
-    public DbSet<User>  Users { get; set; }
+    public DbSet<UserProfile>  UserProfiles { get; set; }
     public DbSet<WorkoutExercise>  WorkoutExercises { get; set; }
     public DbSet<WorkoutSession>  WorkoutSessions { get; set; }
 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
+       base.OnModelCreating(modelBuilder);
        foreach (var entity in modelBuilder.Model.GetEntityTypes())
        {
            entity.SetTableName(entity.GetTableName()?.ToSnakeCase());
@@ -44,7 +48,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
        modelBuilder.ApplyConfiguration(new ExerciseSetConfiguration());
        modelBuilder.ApplyConfiguration(new MuscleGroupConfiguration());
        modelBuilder.ApplyConfiguration(new RunningSessionConfiguration());
-       modelBuilder.ApplyConfiguration(new UserConfiguration());
+       modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
        modelBuilder.ApplyConfiguration(new WorkoutExerciseConfiguration());
        modelBuilder.ApplyConfiguration(new WorkoutSessionConfiguration());
    }

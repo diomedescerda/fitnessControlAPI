@@ -1,6 +1,6 @@
 namespace fitnessControlAPI.Presentation.DTOs.User;
 
-public class UpdateUserRequest
+public class CreateUserProfileRequest
 {
     public required string Name { get; set; }
     public decimal Height { get; set; }

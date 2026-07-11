@@ -14,5 +14,5 @@ public class BodyMeasurement
     public decimal? Calf { get; set;}
     public string? Notes { get; set;}
     
-    public User? User { get; set; }
+    public UserProfile? User { get; set; }
 }

@@ -13,5 +13,5 @@ public class RunningSession
     public int? CaloriesBurned { get; set; }
     public string? Notes { get; set; }
     
-    public User? User { get; set; }
+    public UserProfile? User { get; set; }
 }

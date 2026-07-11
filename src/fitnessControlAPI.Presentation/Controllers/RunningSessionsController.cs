@@ -37,6 +37,12 @@ public class RunningSessionsController(IRunningSessionRepository repository) : C
     {
         return Ok(await _repository.GetWeeklyDistanceByUserIdAndOffsetAsync(userId, offset));
     }
+
+    [HttpGet("recent/{userId}/{n}")]
+    public async Task<IActionResult> GetLastRunningSessionsByUserIdAndN(Guid userId, int n)
+    {
+        return Ok(await _repository.GetLastRunningSessionsByUserIdAndNAsync(userId, n));
+    }
     
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateRunningSessionRequest request)

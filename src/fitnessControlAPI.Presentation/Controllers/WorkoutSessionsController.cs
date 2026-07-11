@@ -38,6 +38,12 @@ public class WorkoutSessionsController(IWorkoutSessionRepository repository) : C
         return Ok(await _repository.GetNoGymSessionsByUserIdAndOffsetAsync(userId, offset));
     }
 
+    [HttpGet("recent/{userId}/{n}")]
+    public async Task<IActionResult> GetLastWorkoutSessionsByUserIdAndN(Guid userId, int n)
+    {
+        return Ok(await _repository.GetLastWorkoutSessionsByUserIdAndNAsync(userId, n));
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateWorkoutSessionRequest request)
     {

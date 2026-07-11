@@ -1,6 +1,6 @@
 namespace fitnessControlAPI.Presentation.DTOs.User;
 
-public class UserResponse
+public class UserProfileResponse
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }

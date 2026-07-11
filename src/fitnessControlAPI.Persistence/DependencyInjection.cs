@@ -19,7 +19,7 @@ public static class DependencyInjection
         services.AddScoped<IExerciseSetRepository, ExerciseSetRepository>();
         services.AddScoped<IMuscleGroupRepository, MuscleGroupRepository>();
         services.AddScoped<IRunningSessionRepository, RunningSessionRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserProfileRepository, UserProfileProfileRepository>();
         services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
         services.AddScoped<IWorkoutSessionRepository, WorkoutSessionRepository>();
         

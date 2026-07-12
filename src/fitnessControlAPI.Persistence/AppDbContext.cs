@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace fitnessControlAPI.Persistence;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
+public class AppDbContext(DbContextOptions<AppDbContext> options) 
+    : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>(options)
 {
     public DbSet<BodyMeasurement>  BodyMeasurements { get; set; }
     public DbSet<ExerciseCategory>  ExerciseCategories { get; set; }
